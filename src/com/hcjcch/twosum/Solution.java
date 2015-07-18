@@ -10,15 +10,14 @@ public class Solution {
         for (int i = 0; i < numbers.length; i++) {
             if (maps.containsKey(target - numbers[i])) {
                 index[0] = maps.get(target - numbers[i]);
-                index[1] = i+1;
+                index[1] = i + 1;
                 return index;
             } else {
                 if (!maps.containsKey(numbers[i])) {
-                    maps.put(numbers[i], i+1);
+                    maps.put(numbers[i], i + 1);
                 }
             }
         }
-
         return null;
     }
 
