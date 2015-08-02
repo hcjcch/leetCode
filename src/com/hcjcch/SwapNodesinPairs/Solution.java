@@ -1,4 +1,4 @@
-package com.hcjcch.MergeTwoSortedLists;
+package com.hcjcch.SwapNodesinPairs;
 
 public class Solution {
     static class ListNode {
@@ -10,30 +10,27 @@ public class Solution {
         }
     }
 
-    public static ListNode mergeTwoLists(ListNode l1, ListNode l2) {
-        ListNode temp = new ListNode(-1);
-        ListNode reNode = temp;
-        while (l1 != null && l2 != null) {
-            if (l1.val < l2.val) {
-                temp.next = l1;
-                l1 = l1.next;
-            } else {
-                temp.next = l2;
-                l2 = l2.next;
-            }
-            temp = temp.next;
+    public static ListNode swapPairs(ListNode head) {
+        if (head == null || head.next == null){
+            return head;
         }
-        while (l1 != null) {
-            temp.next = l1;
+        ListNode fakeHead = new ListNode(-1);
+        fakeHead.next = head;
+        ListNode ptr1 = fakeHead;
+        ListNode ptr2 = head;
+        while(ptr2 != null && ptr2.next != null){
+            ListNode nextStart = ptr2.next.next;
+            ptr2.next.next = ptr2;
+            ptr1.next = ptr2.next;
+            ptr2.next = nextStart;
+            ptr1 = ptr2;
+            ptr2 = ptr2.next;
         }
-        while (l2 != null) {
-            temp.next = l2;
-        }
-        return reNode.next;
+        return fakeHead.next;
     }
 
     public static void main(String[] args) {
-        outNode(mergeTwoLists(generateNode1(), generateNode2()));
+        outNode(swapPairs(generateNode1()));
     }
 
     public static void outNode(ListNode head) {
